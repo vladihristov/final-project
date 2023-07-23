@@ -3,6 +3,7 @@ package finalProj.pages;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
+import org.openqa.selenium.support.PageFactory;
 
 public class HeaderLoggedIn {
     private final WebDriver driver;
@@ -27,5 +28,9 @@ public class HeaderLoggedIn {
     WebElement followBTNs;
     public HeaderLoggedIn(WebDriver driver) {
         this.driver = driver;
+        PageFactory.initElements(driver, this);
+    }
+    public void goToNewPost(){
+        newPostsBTN.click();
     }
 }
