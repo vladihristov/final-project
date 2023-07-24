@@ -4,10 +4,10 @@ import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.PageFactory;
-import org.openqa.selenium.support.ui.ExpectedCondition;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
 
+import java.io.File;
 import java.time.Duration;
 
 public class NewPostPage {
@@ -17,7 +17,7 @@ public class NewPostPage {
 
    @FindBy(css = "h3.text-center")
    WebElement pageHeading;
-   @FindBy(css = ".uploadfilecontainer")
+   @FindBy(css = "input.file[type='file']")
    WebElement uploadContainer;
    @FindBy(id="choose-file")
    WebElement browseBTN;
@@ -38,8 +38,8 @@ public class NewPostPage {
     public void submitPost(){
         submitBTN.click();
     }
-    public void uploadImage(){
-        uploadContainer.sendKeys("C:\\work\\Skillo\\final-project-vladislav-hristov\\src\\test\\java\\finalProj\\testFiles\\austonaut.jpg");
+    public void uploadImage(File file){
+        uploadContainer.sendKeys(file.getAbsolutePath());
     }
     public void checkURLNewPost(){
         wait.until(ExpectedConditions.urlToBe(newPostPageURL));

@@ -1,22 +1,21 @@
 package finalProj.tests;
 
-import finalProj.pages.HeaderLoggedIn;
-import finalProj.pages.HeaderUnauthenticated;
-import finalProj.pages.Login;
-import finalProj.pages.NewPostPage;
+import finalProj.pages.*;
 import io.github.bonigarcia.wdm.WebDriverManager;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.chrome.ChromeDriver;
-import org.testng.annotations.BeforeMethod;
-import org.testng.annotations.BeforeTest;
-import org.testng.annotations.DataProvider;
-import org.testng.annotations.Test;
+import org.testng.Assert;
+import org.testng.annotations.*;
 
+import java.io.File;
 import java.time.Duration;
 
 public class NewPostTest {
     private WebDriver driver;
     private final String homeURL = "http://training.skillo-bg.com/";
+    File file = new File("src/test/java/finalProj/testFiles/austonaut.jpg");
+
+
     @BeforeMethod
     public void setUp(){
         WebDriverManager.chromedriver().setup();
@@ -38,8 +37,13 @@ public class NewPostTest {
         login.enterPass("dyuqweyu");
         login.clickSignInBtn();
 
-        System.out.println("Go to the New Post page");
+        System.out.println("Go to the Profile page and check post count");
         HeaderLoggedIn headerLoggedUser = new HeaderLoggedIn(driver);
+        headerLoggedUser.goToProfilePage();
+        ProfilePage profilePage = new ProfilePage(driver);
+        int postsCount = profilePage.getPostCount();
+
+        System.out.println("Go to the New Post page");
         headerLoggedUser.goToNewPost();
 
         System.out.println("Verify the user is on the New Post page");
@@ -47,6 +51,17 @@ public class NewPostTest {
         newPostPage.checkURLNewPost();
 
         System.out.println("Upload an image");
-        newPostPage.uploadImage();
+        newPostPage.uploadImage(file);
+
+        System.out.println("Add text content to the post");
+        newPostPage.postText("Lorem ipsum dolor sit amet, consectetur adipiscing elit. Test content");
+
+        System.out.println("Click the Submit button");
+        newPostPage.submitPost();
+
+        System.out.println("Check post count again");
+        profilePage.verifyURL();
+        int currentPostCount = profilePage.getPostCount();
+        Assert.assertEquals(currentPostCount,postsCount +1, "The post count is incorrect");
     }
 }

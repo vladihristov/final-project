@@ -33,4 +33,8 @@ public class HeaderLoggedIn {
     public void goToNewPost(){
         newPostsBTN.click();
     }
+
+    public void goToProfilePage(){
+        profileBTN.click();
+    }
 }
