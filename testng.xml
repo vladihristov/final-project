@@ -5,6 +5,7 @@
         <classes>
             <class name="finalProj.tests.NewPostTest"/>
             <class name="finalProj.tests.EditPublicInfoTest"/>
+            <class name="finalProj.tests.PostModalOperations"/>
         </classes>
     </test> <!-- Test -->
 </suite> <!-- Suite -->
