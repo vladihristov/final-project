@@ -3,9 +3,8 @@
 <suite name="Testing iSkillo website">
     <test name="Regression">
         <classes>
-            <class name="Package.JavaClass"/>
-            <class name="Package.JavaClass"/>
-            <class name="Package.JavaClass"/>
+            <class name="finalProj.tests.NewPostTest"/>
+            <class name="finalProj.tests.EditPublicInfoTest"/>
         </classes>
     </test> <!-- Test -->
 </suite> <!-- Suite -->

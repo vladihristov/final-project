@@ -11,6 +11,7 @@ import java.time.Duration;
 
 public class Login {
     private final String URLLogin = "http://training.skillo-bg.com/users/login";
+    private final String postsURL = "http://training.skillo-bg.com/posts/all";
     WebDriver driver;
     WebDriverWait wait;
     @FindBy(css = "form .h4")
@@ -44,4 +45,8 @@ public class Login {
         wait.until(ExpectedConditions.elementToBeClickable(signInBtn));
         signInBtn.click();
     }
+    public void verifyUrlAfterLogin(){
+        wait.until(ExpectedConditions.urlToBe(postsURL));
+    }
+
 }

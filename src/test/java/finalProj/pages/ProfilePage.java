@@ -20,7 +20,12 @@ public class ProfilePage {
 
     @FindBy(css = "app-post")
     List<WebElement> postsList;
-
+    @FindBy(css = ".fas.fa-user-edit")
+    WebElement editBtn;
+    @FindBy(css = "[aria-label='Profile updated']")
+    WebElement toastMessage;
+    @FindBy(css = "div[class='col-12'] p")
+    WebElement userPublicInfo;
 
 
     public ProfilePage(WebDriver driver) {
@@ -34,5 +39,18 @@ public class ProfilePage {
     }
     public void verifyURL(){
         wait.until(ExpectedConditions.urlContains(profileURL));
+    }
+    public String getToastMessageText(){
+        String toastMessageText = toastMessage.getText();
+        return toastMessageText;
+    }
+    public void openEditProfileModal(){
+        editBtn.click();
+    }
+    public String getPublicInfoText(){
+        return userPublicInfo.getText();
+    }
+    public void getProfileText(){
+        userPublicInfo.getText();
     }
 }

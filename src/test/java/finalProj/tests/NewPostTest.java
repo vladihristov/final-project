@@ -33,8 +33,8 @@ public class NewPostTest {
 
         System.out.println("Enter login credentials and login");
         Login login = new Login(driver);
-        login.enterUserNameOrEmail("dyuqweyu");
-        login.enterPass("dyuqweyu");
+        login.enterUserNameOrEmail("vladbg");
+        login.enterPass("7777777$aA");
         login.clickSignInBtn();
 
         System.out.println("Go to the Profile page and check post count");
@@ -63,5 +63,9 @@ public class NewPostTest {
         profilePage.verifyURL();
         int currentPostCount = profilePage.getPostCount();
         Assert.assertEquals(currentPostCount,postsCount +1, "The post count is incorrect");
+    }
+    @AfterMethod
+    public void tearDown(){
+        driver.close();
     }
 }
