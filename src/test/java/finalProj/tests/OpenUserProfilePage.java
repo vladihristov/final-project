@@ -8,6 +8,7 @@ import io.github.bonigarcia.wdm.WebDriverManager;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.chrome.ChromeDriver;
 import org.testng.Assert;
+import org.testng.annotations.AfterMethod;
 import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.Test;
 
@@ -27,7 +28,7 @@ public class OpenUserProfilePage {
         driver.get(homeURL);
     }
     @Test
-    public void openProfilePageFromPost(){
+    public void openProfilePageFromPost() throws InterruptedException {
         int index = 0;
         System.out.println("Verify there are posts on the Homepage");
         HomePage homePage = new HomePage(driver);
@@ -56,7 +57,9 @@ public class OpenUserProfilePage {
         String followBtnTxt = homePage.getPostFollowBtnText(index);
         homePage.clickFollowBtn(index);
         System.out.println("Click on the username to go to the User Profile page");
-        driver.navigate().refresh();
+        //Since there are many toast messages when we unfollow a user the only working solution I found is to add unconditional wait in this form
+        Thread.sleep(4000);
+        //driver.navigate().refresh();
         homePage.clickUserName(index);
         ProfilePage profilePage = new ProfilePage(driver);
         profilePage.verifyProfileUrl();
@@ -64,5 +67,9 @@ public class OpenUserProfilePage {
         Assert.assertEquals(profilePageUsername, homePostUsername, "The username text is incorrect");
         String currentFollowBtnTxt = profilePage.getFollowBtnText();
         Assert.assertNotEquals(currentFollowBtnTxt, followBtnTxt, "The 'Follow' button text is incorrect");
+    }
+    @AfterMethod
+    public void tearDown(){
+        driver.close();
     }
 }
