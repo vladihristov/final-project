@@ -10,21 +10,9 @@ import org.testng.annotations.*;
 import java.io.File;
 import java.time.Duration;
 
-public class NewPostTest {
-    private WebDriver driver;
-    private final String homeURL = "http://training.skillo-bg.com/";
+public class NewPostTest extends BaseTest{
     File file = new File("src/test/java/finalProj/testFiles/austonaut.jpg");
 
-
-    @BeforeMethod
-    public void setUp(){
-        WebDriverManager.chromedriver().setup();
-        driver = new ChromeDriver();
-        driver.manage().window().maximize();
-        driver.manage().timeouts().implicitlyWait(Duration.ofSeconds(3));
-        driver.manage().timeouts().pageLoadTimeout(Duration.ofSeconds(20));
-        driver.get(homeURL);
-    }
     @Test
     public void newPostTest(){
         System.out.println("Go To Login Page");
@@ -67,9 +55,5 @@ public class NewPostTest {
         profilePage.verifyProfileUrl();
         int currentPostCount = profilePage.getPostCount();
         Assert.assertEquals(currentPostCount,postsCount +1, "The post count is incorrect");
-    }
-    @AfterMethod
-    public void tearDown(){
-        driver.close();
     }
 }

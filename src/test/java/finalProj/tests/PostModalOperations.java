@@ -14,20 +14,9 @@ import org.testng.annotations.Test;
 import java.io.File;
 import java.time.Duration;
 
-public class PostModalOperations {
-    private WebDriver driver;
-    private final String homeURL = "http://training.skillo-bg.com/";
+public class PostModalOperations extends BaseTest{
     private final int postIndex = 0;
 
-    @BeforeMethod
-    public void setUp(){
-        WebDriverManager.chromedriver().setup();
-        driver = new ChromeDriver();
-        driver.manage().window().maximize();
-        driver.manage().timeouts().implicitlyWait(Duration.ofSeconds(3));
-        driver.manage().timeouts().pageLoadTimeout(Duration.ofSeconds(20));
-        driver.get(homeURL);
-    }
     @Test
     public void newPostTest() {
         System.out.println("Go To Login Page");
@@ -79,9 +68,5 @@ public class PostModalOperations {
         homePage.openPostByIndex(postIndex);
         homePage.verifyPostIsLiked();
         Assert.assertEquals(homePage.getCommentText(homePage.getCommentsCount()-1), "Nice post!", "Text is incorrect");
-    }
-    @AfterMethod
-    public void tearDown(){
-        driver.close();
     }
 }

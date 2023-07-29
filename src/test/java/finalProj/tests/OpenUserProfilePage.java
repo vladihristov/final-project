@@ -15,19 +15,8 @@ import org.testng.annotations.Test;
 import java.time.Duration;
 
 //In this test we will verify that unauthenticated users can go to a profile page of users
-public class OpenUserProfilePage {
-    private WebDriver driver;
-    private final String homeURL = "http://training.skillo-bg.com/";
+public class OpenUserProfilePage extends BaseTest{
     int index = 0;
-    @BeforeMethod
-    public void setUp(){
-        WebDriverManager.chromedriver().setup();
-        driver = new ChromeDriver();
-        driver.manage().window().maximize();
-        driver.manage().timeouts().implicitlyWait(Duration.ofSeconds(3));
-        driver.manage().timeouts().pageLoadTimeout(Duration.ofSeconds(20));
-        driver.get(homeURL);
-    }
     @Test
     public void openProfilePageFromPost() throws InterruptedException {
         System.out.println("Verify there are posts on the Homepage");
@@ -67,9 +56,5 @@ public class OpenUserProfilePage {
         Assert.assertEquals(profilePageUsername, homePostUsername, "The username text is incorrect");
         String currentFollowBtnTxt = profilePage.getFollowBtnText();
         Assert.assertNotEquals(currentFollowBtnTxt, followBtnTxt, "The 'Follow' button text is incorrect");
-    }
-    @AfterMethod
-    public void tearDown(){
-        driver.close();
     }
 }

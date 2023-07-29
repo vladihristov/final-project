@@ -11,18 +11,7 @@ import org.testng.annotations.Test;
 
 import java.time.Duration;
 
-public class EditPublicInfoTest {
-    private WebDriver driver;
-    private final String homeURL = "http://training.skillo-bg.com/";
-    @BeforeMethod
-    public void setUp() {
-        WebDriverManager.chromedriver().setup();
-        driver = new ChromeDriver();
-        driver.manage().window().maximize();
-        driver.manage().timeouts().implicitlyWait(Duration.ofSeconds(3));
-        driver.manage().timeouts().pageLoadTimeout(Duration.ofSeconds(20));
-        driver.get(homeURL);
-    }
+public class EditPublicInfoTest extends BaseTest {
     @Test
     public void editProfilePublicInfo() {
         System.out.println("Go To Login Page");
@@ -58,10 +47,5 @@ public class EditPublicInfoTest {
         String currentProfilePublicText = profilePage.getPublicInfoText();
         System.out.println("Verify that the text is added to the profile");
         Assert.assertEquals(currentProfilePublicText, username+"  "+publicTextTyped+" \uD83D\uDCF7✈\uFE0F\uD83C\uDFD5\uFE0F", "The profile public text is incorrect");
-
-    }
-    @AfterMethod
-    public void tearDown(){
-        driver.close();
     }
 }

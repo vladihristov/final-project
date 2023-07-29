@@ -20,21 +20,9 @@ import java.io.File;
 import java.io.IOException;
 import java.time.Duration;
 
-public class SearchTest {
-    private WebDriver driver;
-    private final String homeURL = "http://training.skillo-bg.com/";
+public class SearchTest extends BaseTest {
     private final String searchKeyWord = "test";
     int rowIndex = 0;
-    public static final String SCREENSHOT_DIR = "src" + File.separator + "test" + File.separator + "java" + File.separator + "finalProj" + File.separator + "screenshots"+ File.separator;
-    @BeforeMethod
-    public void setUp() {
-        WebDriverManager.chromedriver().setup();
-        driver = new ChromeDriver();
-        driver.manage().window().maximize();
-        driver.manage().timeouts().implicitlyWait(Duration.ofSeconds(3));
-        driver.manage().timeouts().pageLoadTimeout(Duration.ofSeconds(20));
-        driver.get(homeURL);
-    }
     @Test
     public void followUserAndOpenProfile() throws InterruptedException {
         System.out.println("Go To Login Page");
@@ -76,21 +64,5 @@ public class SearchTest {
         Assert.assertEquals(profilePageUsername, searchDropdownUsernameText, "The username is incorrect");
         Assert.assertNotEquals(profilePage.getFollowBtnText(), searchDropdownBtnText, "The follow button text is incorrect");
     }
-    @AfterMethod
-    public void tearDown(ITestResult testResult){
-        takeScreenShot(testResult);
-        driver.close();
-    }
-    private void takeScreenShot(ITestResult testResult) {
-        if (ITestResult.FAILURE == testResult.getStatus()) {
-            TakesScreenshot takesScreenshot = (TakesScreenshot) driver;
-            File screenshot = takesScreenshot.getScreenshotAs(OutputType.FILE);
-            String testName = testResult.getName();
-            try {
-                FileUtils.copyFile(screenshot, new File(SCREENSHOT_DIR.concat(testName).concat(".jpg")));
-            } catch (IOException e) {
-                throw new RuntimeException(e);
-            }
-        }
-    }
+
 }
