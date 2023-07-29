@@ -33,12 +33,16 @@ public class PostModalOperations {
         System.out.println("Go To Login Page");
         HeaderUnauthenticated headerNotLoggedIn = new HeaderUnauthenticated(driver);
         headerNotLoggedIn.goToLogin();
+        headerNotLoggedIn.verifyLoginUrl();
 
         System.out.println("Enter login credentials and login");
         Login login = new Login(driver);
-        login.enterUserNameOrEmail("vladbg");
-        login.enterPass("7777777$aA");
+        String username = "Vlad1TestAcc";
+        String password = "7777777$aA";
+        login.enterUserNameOrEmail(username);
+        login.enterPass(password);
         login.clickSignInBtn();
+        login.verifyUrlAfterLogin();
 
         System.out.println("Verify the user is on the posts page after login");
         login.verifyUrlAfterLogin();

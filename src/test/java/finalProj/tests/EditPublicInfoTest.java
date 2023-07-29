@@ -28,6 +28,7 @@ public class EditPublicInfoTest {
         System.out.println("Go To Login Page");
         HeaderUnauthenticated headerNotLoggedIn = new HeaderUnauthenticated(driver);
         headerNotLoggedIn.goToLogin();
+        headerNotLoggedIn.verifyLoginUrl();
 
         System.out.println("Enter login credentials and login");
         Login login = new Login(driver);
@@ -36,6 +37,7 @@ public class EditPublicInfoTest {
         login.enterUserNameOrEmail(username);
         login.enterPass(password);
         login.clickSignInBtn();
+        login.verifyUrlAfterLogin();
 
         System.out.println("Go to the Profile page open the edit profile pop up");
         HeaderLoggedIn headerLoggedUser = new HeaderLoggedIn(driver);

@@ -33,6 +33,7 @@ public class SearchTest {
         System.out.println("Go To Login Page");
         HeaderUnauthenticated headerNotLoggedIn = new HeaderUnauthenticated(driver);
         headerNotLoggedIn.goToLogin();
+        headerNotLoggedIn.verifyLoginUrl();
 
         System.out.println("Enter login credentials and login");
         Login login = new Login(driver);
@@ -41,6 +42,7 @@ public class SearchTest {
         login.enterUserNameOrEmail(username);
         login.enterPass(password);
         login.clickSignInBtn();
+        login.verifyUrlAfterLogin();
 
         System.out.println("Start searching and verify the search dropdown with results appears");
         HeaderLoggedIn headerLoggedIn = new HeaderLoggedIn(driver);

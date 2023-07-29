@@ -30,12 +30,16 @@ public class NewPostTest {
         System.out.println("Go To Login Page");
         HeaderUnauthenticated headerNotLoggedIn = new HeaderUnauthenticated(driver);
         headerNotLoggedIn.goToLogin();
+        headerNotLoggedIn.verifyLoginUrl();
 
         System.out.println("Enter login credentials and login");
         Login login = new Login(driver);
-        login.enterUserNameOrEmail("vladbg");
-        login.enterPass("7777777$aA");
+        String username = "Vlad1TestAcc";
+        String password = "7777777$aA";
+        login.enterUserNameOrEmail(username);
+        login.enterPass(password);
         login.clickSignInBtn();
+        login.verifyUrlAfterLogin();
 
         System.out.println("Go to the Profile page and check post count");
         HeaderLoggedIn headerLoggedUser = new HeaderLoggedIn(driver);

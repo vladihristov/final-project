@@ -18,6 +18,7 @@ import java.time.Duration;
 public class OpenUserProfilePage {
     private WebDriver driver;
     private final String homeURL = "http://training.skillo-bg.com/";
+    int index = 0;
     @BeforeMethod
     public void setUp(){
         WebDriverManager.chromedriver().setup();
@@ -29,7 +30,6 @@ public class OpenUserProfilePage {
     }
     @Test
     public void openProfilePageFromPost() throws InterruptedException {
-        int index = 0;
         System.out.println("Verify there are posts on the Homepage");
         HomePage homePage = new HomePage(driver);
         homePage.waitPostsToAppear();
@@ -59,7 +59,7 @@ public class OpenUserProfilePage {
         System.out.println("Click on the username to go to the User Profile page");
         //Since there are many toast messages when we unfollow a user the only working solution I found is to add unconditional wait in this form
         Thread.sleep(4000);
-        //driver.navigate().refresh();
+        //driver.navigate().refresh(); if the Thread.sleep does not work we can use page refresh too
         homePage.clickUserName(index);
         ProfilePage profilePage = new ProfilePage(driver);
         profilePage.verifyProfileUrl();
