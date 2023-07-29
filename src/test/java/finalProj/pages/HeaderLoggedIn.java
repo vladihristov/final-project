@@ -28,13 +28,12 @@ public class HeaderLoggedIn extends BasePage {
     WebElement signOutBTN;
     @FindBy(css = ".dropdown-container")
     WebElement searchDropdown;
-    @FindBy(css = ".dropdown-container .btn.btn-primary.ng-star-inserted")
+    @FindBy(css = ".dropdown-container .btn.btn-primary")
     List <WebElement> searchDropdownFollowBTNs;
     @FindBy(css = ".dropdown-container .post-user")
     List <WebElement> searchDropdownUsers;
     @FindBy(css = ".dropdown-container app-small-user-profile")
     List<WebElement> searchDropdownRows;
-
     public HeaderLoggedIn(WebDriver driver) {
         super(driver);
         PageFactory.initElements(driver, this);
@@ -60,11 +59,6 @@ public class HeaderLoggedIn extends BasePage {
     }
     public void followUserByIndex(int index){
         clickElement(searchDropdownFollowBTNs.get(index));
-    }
-    public String getElementText(WebElement element){
-        smallWait.until(ExpectedConditions.visibilityOf(element));
-        return element.getText();
-
     }
     public String getUsernameByIndex(int index){
         return getElementText(searchDropdownUsers.get(index));

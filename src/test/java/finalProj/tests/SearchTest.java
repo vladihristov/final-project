@@ -29,7 +29,7 @@ public class SearchTest {
         driver.get(homeURL);
     }
     @Test
-    public void editProfilePublicInfo() throws InterruptedException {
+    public void followUserOpenUserProfile() {
         System.out.println("Go To Login Page");
         HeaderUnauthenticated headerNotLoggedIn = new HeaderUnauthenticated(driver);
         headerNotLoggedIn.goToLogin();
@@ -58,8 +58,7 @@ public class SearchTest {
         headerLoggedIn.openSearchResultByIndex(rowIndex);
 
         System.out.println("Verify user profile page is opened");
-
-        profilePage.verifyURL();
+        profilePage.verifyProfileUrl();
 
         System.out.println("Verify the user is the same as the one that is clicked. Verify the clicked Follow button is applied");
         String profilePageUsername = profilePage.getUsernameText();

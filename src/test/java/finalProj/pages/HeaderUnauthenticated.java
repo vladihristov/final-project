@@ -6,7 +6,7 @@ import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.PageFactory;
 
 public class HeaderUnauthenticated extends BasePage {
-
+    private final String loginLink = "http://training.skillo-bg.com/users/login";
     @FindBy(id="homeIcon")
     WebElement logo;
     @FindBy(id="nav-link-home")
@@ -19,5 +19,8 @@ public class HeaderUnauthenticated extends BasePage {
     }
     public void goToLogin(){
         clickElement(loginBTN);
+    }
+    public void verifyLoginUrl(){
+        verifyURL(loginLink);
     }
 }

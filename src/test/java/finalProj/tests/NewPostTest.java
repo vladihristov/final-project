@@ -60,7 +60,7 @@ public class NewPostTest {
         newPostPage.submitPost();
 
         System.out.println("Check post count again");
-        profilePage.verifyURL();
+        profilePage.verifyProfileUrl();
         int currentPostCount = profilePage.getPostCount();
         Assert.assertEquals(currentPostCount,postsCount +1, "The post count is incorrect");
     }

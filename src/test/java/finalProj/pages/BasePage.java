@@ -17,8 +17,8 @@ public class BasePage {
 
     public BasePage(WebDriver driver) {
         this.driver = driver;
-        smallWait = new WebDriverWait(driver, Duration.ofSeconds(5));
-        mediumWait = new WebDriverWait(driver, Duration.ofSeconds(10));
+        smallWait = new WebDriverWait(driver, Duration.ofSeconds(3));
+        mediumWait = new WebDriverWait(driver, Duration.ofSeconds(5));
         longWait = new WebDriverWait(driver, Duration.ofSeconds(30));
     }
     protected void clickElement(WebElement element) {

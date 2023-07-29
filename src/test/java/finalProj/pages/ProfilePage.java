@@ -25,7 +25,7 @@ public class ProfilePage extends BasePage {
     WebElement userPublicInfo;
     @FindBy(css = "div[class='col-12 col-lg-6 profile-user-settings'] h2")
     WebElement userName;
-    @FindBy(css = ".btn.btn-primary.profile-edit-btn.ng-star-inserted")
+    @FindBy(css = ".btn.btn-primary.profile-edit-btn")
     WebElement followBtn;
 
 
@@ -37,7 +37,7 @@ public class ProfilePage extends BasePage {
     public int getPostCount(){
         return getListSize(postsList);
     }
-    public void verifyURL(){
+    public void verifyProfileUrl(){
         longWait.until(ExpectedConditions.urlContains(profileURL));
     }
     public String getToastMessageText(){

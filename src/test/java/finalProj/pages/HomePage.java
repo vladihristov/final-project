@@ -14,6 +14,7 @@ import java.util.List;
 
 public class HomePage extends BasePage {
     private final String homeURL = "http://training.skillo-bg.com/posts/all";
+    private final String notFoundUrl = "http://training.skillo-bg.com/not-found";
     @FindBy(css = "app-post-detail")
     List<WebElement> homePostsList;
     @FindBy(css = ".like.far.fa-heart.fa-2x")
@@ -28,11 +29,18 @@ public class HomePage extends BasePage {
     WebElement postCommmentInputField;
     @FindBy(css = ".col-12.comment-content")
     List<WebElement> postCommentsList;
+    @FindBy(css = ".post-user")
+    List<WebElement> postUsers;
+    @FindBy(css = "app-post-detail")
+    List<WebElement> postsHomepage;
+    @FindBy(css = ".row.post-list-container")
+    WebElement postsContainer;
+    @FindBy(css = ".btn.btn-primary")
+    List<WebElement> postsFollowBtns;
     public HomePage(WebDriver driver) {
         super(driver);
         PageFactory.initElements(driver, this);
     }
-
     public void checkURLNewPost(){
        verifyURL(homeURL);
     }
@@ -78,6 +86,28 @@ public class HomePage extends BasePage {
     public String getCommentText(int listIndex){
         return getElementText(postCommentsList.get(listIndex));
     }
-
-
+    public int getPostsUsersSize(){
+        return getListSize(postUsers);
+    }
+    public String getPostUsernameText(int userIndex){
+        return getElementText(postUsers.get(userIndex));
+    }
+    public void clickUserName(int userIndex){
+        clickElement(postUsers.get(userIndex));
+    }
+    public void verifyNotFoundUrl() {
+        verifyURL(notFoundUrl);
+    }
+    public void waitPostsToAppear(){
+        verifyVisibility(postsContainer);
+    }
+    public int getFollowBtnsSize(){
+        return getListSize(postsFollowBtns);
+    }
+    public String getPostFollowBtnText(int btnIndex){
+        return getElementText(postsFollowBtns.get(btnIndex));
+    }
+    public void clickFollowBtn(int btnIndex){
+        clickElement(postsFollowBtns.get(btnIndex));
+    }
 }
