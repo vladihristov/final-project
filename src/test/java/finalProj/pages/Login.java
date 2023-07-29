@@ -9,11 +9,9 @@ import org.openqa.selenium.support.ui.WebDriverWait;
 
 import java.time.Duration;
 
-public class Login {
+public class Login extends BasePage {
     private final String URLLogin = "http://training.skillo-bg.com/users/login";
     private final String postsURL = "http://training.skillo-bg.com/posts/all";
-    WebDriver driver;
-    WebDriverWait wait;
     @FindBy(css = "form .h4")
     WebElement signInText;
     @FindBy(name = "usernameOrEmail")
@@ -25,28 +23,24 @@ public class Login {
     WebElement signInBtn;
 
     public Login(WebDriver driver) {
-        this.driver = driver;
+        super(driver);
         PageFactory.initElements(driver, this);
-        wait = new WebDriverWait(driver, Duration.ofSeconds(5));
-
     }
 
     public void enterUserNameOrEmail(String userName) {
-        wait.until(ExpectedConditions.visibilityOf(userNameField));
+        verifyVisibility(userNameField);
         userNameField.sendKeys(userName);
     }
 
     public void enterPass(String pass) {
-        wait.until(ExpectedConditions.visibilityOf(passField));
+        verifyVisibility(passField);
         passField.sendKeys(pass);
     }
 
     public void clickSignInBtn() {
-        wait.until(ExpectedConditions.elementToBeClickable(signInBtn));
-        signInBtn.click();
+        clickElement(signInBtn);
     }
     public void verifyUrlAfterLogin(){
-        wait.until(ExpectedConditions.urlToBe(postsURL));
+        verifyURL(postsURL);
     }
-
 }

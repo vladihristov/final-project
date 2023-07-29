@@ -12,10 +12,8 @@ import org.testng.Assert;
 import java.time.Duration;
 import java.util.List;
 
-public class HomePage {
+public class HomePage extends BasePage {
     private final String homeURL = "http://training.skillo-bg.com/posts/all";
-    WebDriver driver;
-    WebDriverWait wait;
     @FindBy(css = "app-post-detail")
     List<WebElement> homePostsList;
     @FindBy(css = ".like.far.fa-heart.fa-2x")
@@ -31,20 +29,15 @@ public class HomePage {
     @FindBy(css = ".col-12.comment-content")
     List<WebElement> postCommentsList;
     public HomePage(WebDriver driver) {
-        this.driver = driver;
+        super(driver);
         PageFactory.initElements(driver, this);
-        wait = new WebDriverWait(driver, Duration.ofSeconds(5));
     }
 
     public void checkURLNewPost(){
-        wait.until(ExpectedConditions.urlToBe(homeURL));
+       verifyURL(homeURL);
     }
     public int getPostCount(){
-        return homePostsList.size();
-    }
-    public void clickElement(WebElement element) {
-        wait.until(ExpectedConditions.elementToBeClickable(element));
-        element.click();
+        return getListSize(homePostsList);
     }
     public  void openPostByIndex(int index){
         clickElement(homePostsList.get(index));
@@ -62,16 +55,16 @@ public class HomePage {
         clickElement(dislikeIconSelected);
     }
     public void verifyPostIsLiked(){
-        wait.until(ExpectedConditions.visibilityOf(heartIconSelected));
+        verifyVisibility(heartIconSelected);
     }
     public void verifyPostIsNotLiked(){
-        wait.until(ExpectedConditions.visibilityOf(heartIcon));
+        verifyVisibility(heartIcon);
     }
     public void verifyPostIsDisliked(){
-        wait.until(ExpectedConditions.visibilityOf(dislikeIconSelected));
+        verifyVisibility(dislikeIconSelected);
     }
     public void verifyPostIsNotDisliked(){
-        wait.until(ExpectedConditions.visibilityOf(dislikeIcon));
+        verifyVisibility(dislikeIcon);
     }
     public void writeComment(String text){
         postCommmentInputField.sendKeys(text);
@@ -79,15 +72,12 @@ public class HomePage {
     public void postComment(){
         postCommmentInputField.sendKeys(Keys.ENTER);
     }
-    public int getcommentsCount(){
+    public int getCommentsCount(){
        return postCommentsList.size();
     }
-    public String getElementText(WebElement element) {
-        wait.until(ExpectedConditions.visibilityOf(element));
-        return element.getText();
-    }
     public String getCommentText(int listIndex){
-        String commentText = getElementText(postCommentsList.get(listIndex));
-        return commentText;
+        return getElementText(postCommentsList.get(listIndex));
     }
+
+
 }

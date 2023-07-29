@@ -11,11 +11,8 @@ import org.openqa.selenium.support.ui.WebDriverWait;
 import java.time.Duration;
 import java.util.List;
 
-public class ProfilePage {
+public class ProfilePage extends BasePage {
     private final String profileURL = "http://training.skillo-bg.com/users";
-    WebDriver driver;
-    WebDriverWait wait;
-    WebDriverWait longWait;
     @FindBy(css = "profile-stat-count")
     WebElement postCounter;
     @FindBy(css = "app-post")
@@ -33,38 +30,33 @@ public class ProfilePage {
 
 
     public ProfilePage(WebDriver driver) {
-        this.driver = driver;
+        super(driver);
         PageFactory.initElements(driver, this);
-        wait = new WebDriverWait(driver, Duration.ofSeconds(5));
-        longWait = new WebDriverWait(driver, Duration.ofSeconds(25));
     }
 
     public int getPostCount(){
-        return postsList.size();
+        return getListSize(postsList);
     }
     public void verifyURL(){
         longWait.until(ExpectedConditions.urlContains(profileURL));
     }
     public String getToastMessageText(){
-        return toastMessage.getText();
+        return getElementText(toastMessage);
     }
     public void openEditProfileModal(){
-        editBtn.click();
+        clickElement(editBtn);
     }
     public String getPublicInfoText(){
-        return userPublicInfo.getText();
-    }
-    public void getProfileText(){
-        userPublicInfo.getText();
+        return getElementText(userPublicInfo);
     }
     public String getUsernameText(){
-        wait.until(ExpectedConditions.visibilityOf(userName));
-        return userName.getText();
+        verifyVisibility(userName);
+        return getElementText(userName);
     }
     public void clickFollowBtn(){
-        followBtn.click();
+        clickElement(followBtn);
     }
     public String getFollowBtnText(){
-        return followBtn.getText();
+        return getElementText(followBtn);
     }
 }

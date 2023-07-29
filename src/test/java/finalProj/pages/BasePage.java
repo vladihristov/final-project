@@ -5,7 +5,9 @@ import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
 
+import java.io.File;
 import java.time.Duration;
+import java.util.List;
 
 public class BasePage {
     protected final WebDriver driver;
@@ -26,5 +28,17 @@ public class BasePage {
     protected String getElementText(WebElement element) {
         smallWait.until(ExpectedConditions.visibilityOf(element));
         return element.getText();
+    }
+    public void verifyURL(String url){
+        mediumWait.until(ExpectedConditions.urlToBe(url));
+    }
+    public void verifyUrlContains(String url) {
+        mediumWait.until(ExpectedConditions.urlContains(url));
+    }
+    public int getListSize(List webElement){
+        return webElement.size();
+    }
+    public void verifyVisibility(WebElement webElement){
+        smallWait.until(ExpectedConditions.visibilityOf(webElement));
     }
 }

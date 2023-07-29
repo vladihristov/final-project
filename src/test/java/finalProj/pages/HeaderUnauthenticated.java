@@ -5,8 +5,7 @@ import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.PageFactory;
 
-public class HeaderUnauthenticated {
-    private final WebDriver driver;
+public class HeaderUnauthenticated extends BasePage {
 
     @FindBy(id="homeIcon")
     WebElement logo;
@@ -15,10 +14,10 @@ public class HeaderUnauthenticated {
     @FindBy(id="nav-link-login")
     WebElement loginBTN;
     public HeaderUnauthenticated(WebDriver driver) {
-        this.driver = driver;
+        super(driver);
         PageFactory.initElements(driver, this);
     }
     public void goToLogin(){
-        loginBTN.click();
+        clickElement(loginBTN);
     }
 }

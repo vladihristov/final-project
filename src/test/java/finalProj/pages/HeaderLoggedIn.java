@@ -55,7 +55,7 @@ public class HeaderLoggedIn extends BasePage {
     public int getRowListSize(){
        return searchDropdownRows.size();
     }
-    public  void openSearchResultByIndex(int index){
+    public void openSearchResultByIndex(int index){
         clickElement(searchDropdownUsers.get(index));
     }
     public void followUserByIndex(int index){

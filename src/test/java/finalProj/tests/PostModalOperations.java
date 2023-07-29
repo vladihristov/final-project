@@ -68,13 +68,13 @@ public class PostModalOperations {
         homePage.verifyPostIsLiked();
         homePage.writeComment("Nice post!");
         homePage.postComment();
-        Assert.assertEquals(homePage.getCommentText(homePage.getcommentsCount()-1), "Nice post!", "Text is incorrect");
+        Assert.assertEquals(homePage.getCommentText(homePage.getCommentsCount()-1), "Nice post!", "Text is incorrect");
 
         System.out.println("Verify the like and post are saved after page refresh");
         driver.navigate().refresh();
         homePage.openPostByIndex(postIndex);
         homePage.verifyPostIsLiked();
-        Assert.assertEquals(homePage.getCommentText(homePage.getcommentsCount()-1), "Nice post!", "Text is incorrect");
+        Assert.assertEquals(homePage.getCommentText(homePage.getCommentsCount()-1), "Nice post!", "Text is incorrect");
     }
     @AfterMethod
     public void tearDown(){

@@ -51,7 +51,7 @@ public class NewPostTest {
         newPostPage.checkURLNewPost();
 
         System.out.println("Upload an image");
-        newPostPage.uploadImage(file);
+        newPostPage.uploadPostImage(file);
 
         System.out.println("Add text content to the post");
         newPostPage.postText("Lorem ipsum dolor sit amet, consectetur adipiscing elit. Test content");

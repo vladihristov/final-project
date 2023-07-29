@@ -9,10 +9,7 @@ import org.openqa.selenium.support.ui.WebDriverWait;
 
 import java.time.Duration;
 
-public class ProfilePopUp {
-    private final WebDriver driver;
-    WebDriverWait wait;
-
+public class ProfilePopUp extends BasePage {
     @FindBy(tagName = "app-edit-profile-modal")
     WebElement profileModal;
     @FindBy(css = "[formcontrolname='username']")
@@ -30,9 +27,8 @@ public class ProfilePopUp {
 
 
     public ProfilePopUp(WebDriver driver) {
-        this.driver = driver;
+        super(driver);
         PageFactory.initElements(driver,this);
-        wait = new WebDriverWait(driver, Duration.ofSeconds(3));
     }
     public void enterPassword(String passwordText){
         passwordInput.sendKeys(passwordText);
@@ -47,10 +43,10 @@ public class ProfilePopUp {
         publicInfoInput.sendKeys(publicInfoText);
     }
     public void saveProfileChanges(){
-        saveBtn.click();
+        clickElement(saveBtn);
     }
     public void waitEditProfilePopUp(){
-        wait.until(ExpectedConditions.visibilityOf(profileModal));
+        verifyVisibility(profileModal);
     }
 
 }

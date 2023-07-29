@@ -10,11 +10,8 @@ import org.openqa.selenium.support.ui.WebDriverWait;
 import java.io.File;
 import java.time.Duration;
 
-public class NewPostPage {
-    private final WebDriver driver;
+public class NewPostPage extends BasePage {
     private final String newPostPageURL = "http://training.skillo-bg.com/posts/create";
-    WebDriverWait wait;
-
    @FindBy(css = "h3.text-center")
    WebElement pageHeading;
    @FindBy(css = "input.file[type='file']")
@@ -27,21 +24,19 @@ public class NewPostPage {
    WebElement submitBTN;
 
     public NewPostPage(WebDriver driver) {
-        this.driver = driver;
+        super(driver);
         PageFactory.initElements(driver, this);
-        wait = new WebDriverWait(driver, Duration.ofSeconds(5));
-
     }
     public void postText(String postText){
         postPlaceholderText.sendKeys(postText);
     }
     public void submitPost(){
-        submitBTN.click();
+        clickElement(submitBTN);
     }
-    public void uploadImage(File file){
+    public void uploadPostImage(File file){
         uploadContainer.sendKeys(file.getAbsolutePath());
     }
     public void checkURLNewPost(){
-        wait.until(ExpectedConditions.urlToBe(newPostPageURL));
+        verifyURL(newPostPageURL);
     }
 }
