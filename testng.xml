@@ -6,6 +6,8 @@
             <class name="finalProj.tests.NewPostTest"/>
             <class name="finalProj.tests.EditPublicInfoTest"/>
             <class name="finalProj.tests.PostModalOperations"/>
+            <class name="finalProj.tests.OpenUserProfilePage"/>
+            <class name="finalProj.tests.SearchTest"/>
         </classes>
     </test> <!-- Test -->
 </suite> <!-- Suite -->

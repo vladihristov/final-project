@@ -1,0 +1,12 @@
+<!DOCTYPE suite SYSTEM "https://testng.org/testng-1.0.dtd" >
+
+<suite name="Web test suite" verbose="1">
+    <test name="Smoke Tests">
+        <classes>
+            <class name="finalProj.tests.OpenUserProfilePage"></class>
+            <class name="finalProj.tests.NewPostTest"></class>
+            <class name="finalProj.tests.PostModalOperations"></class>
+            <class name="finalProj.tests.EditPublicInfoTest"></class>
+        </classes>
+    </test>
+</suite>
