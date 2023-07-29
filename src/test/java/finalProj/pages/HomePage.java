@@ -50,16 +50,16 @@ public class HomePage {
         clickElement(homePostsList.get(index));
     }
     public void likePost(){
-        heartIcon.click();
+        clickElement(heartIcon);
     }
     public void removePostLike(){
-        heartIconSelected.click();
+        clickElement(heartIconSelected);
     }
     public void dislikePost(){
-        dislikeIcon.click();
+        clickElement(dislikeIcon);
     }
     public void removePostDislike(){
-        dislikeIconSelected.click();
+        clickElement(dislikeIconSelected);
     }
     public void verifyPostIsLiked(){
         wait.until(ExpectedConditions.visibilityOf(heartIconSelected));

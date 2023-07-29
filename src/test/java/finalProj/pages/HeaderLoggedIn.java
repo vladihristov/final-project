@@ -4,9 +4,13 @@ import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.PageFactory;
+import org.openqa.selenium.support.ui.ExpectedConditions;
+import org.openqa.selenium.support.ui.WebDriverWait;
 
-public class HeaderLoggedIn {
-    private final WebDriver driver;
+import java.time.Duration;
+import java.util.List;
+
+public class HeaderLoggedIn extends BasePage {
 
     @FindBy(id="homeIcon")
     WebElement logo;
@@ -17,24 +21,62 @@ public class HeaderLoggedIn {
     @FindBy(id="nav-link-new-post")
     WebElement newPostsBTN;
     @FindBy(id="search-bar")
-    WebElement searchBar;
+    WebElement searchInput;
     @FindBy(css = ".fas.fa-search")
     WebElement searchIcon;
     @FindBy(css = ".fa-sign-out-alt")
     WebElement signOutBTN;
     @FindBy(css = ".dropdown-container")
     WebElement searchDropdown;
-    @FindBy(css = ".btn-primary.ng-star-inserted")
-    WebElement followBTNs;
+    @FindBy(css = ".dropdown-container .btn.btn-primary.ng-star-inserted")
+    List <WebElement> searchDropdownFollowBTNs;
+    @FindBy(css = ".dropdown-container .post-user")
+    List <WebElement> searchDropdownUsers;
+    @FindBy(css = ".dropdown-container app-small-user-profile")
+    List<WebElement> searchDropdownRows;
+
     public HeaderLoggedIn(WebDriver driver) {
-        this.driver = driver;
+        super(driver);
         PageFactory.initElements(driver, this);
     }
     public void goToNewPost(){
-        newPostsBTN.click();
+        clickElement(newPostsBTN);
     }
 
     public void goToProfilePage(){
-        profileBTN.click();
+        clickElement(profileBTN);
+    }
+    public void searchByKeyword(String searchKeyword){
+        searchInput.sendKeys(searchKeyword);
+    }
+    public void verifyDropdownAppears(){
+        longWait.until(ExpectedConditions.visibilityOf(searchDropdown));
+    }
+    public int getRowListSize(){
+       return searchDropdownRows.size();
+    }
+    public  void openSearchResultByIndex(int index){
+        clickElement(searchDropdownUsers.get(index));
+    }
+    public void followUserByIndex(int index){
+        clickElement(searchDropdownFollowBTNs.get(index));
+    }
+    public String getElementText(WebElement element){
+        smallWait.until(ExpectedConditions.visibilityOf(element));
+        return element.getText();
+
+    }
+    public String getUsernameByIndex(int index){
+        return getElementText(searchDropdownUsers.get(index));
+
+    }
+    public String getBtnTextByIndex(int index){
+        return getElementText(searchDropdownFollowBTNs.get(index));
+    }
+    public void clickSearchIcon(){
+        clickElement(searchIcon);
+    }
+    public void clickSearchInput(){
+        clickElement(searchInput);
     }
 }
