@@ -29,7 +29,7 @@ public class SearchTest {
         driver.get(homeURL);
     }
     @Test
-    public void followUserOpenUserProfile() {
+    public void followUserAndOpenProfile() throws InterruptedException {
         System.out.println("Go To Login Page");
         HeaderUnauthenticated headerNotLoggedIn = new HeaderUnauthenticated(driver);
         headerNotLoggedIn.goToLogin();
@@ -55,6 +55,8 @@ public class SearchTest {
         headerLoggedIn.verifyDropdownAppears();
         ProfilePage profilePage = new ProfilePage(driver);
         System.out.println("Open the followed user and verify that the user is still followed on their profile page");
+        //Since there are many toast messages when we unfollow a user the only working solution I found is to add unconditional wait in this form
+        Thread.sleep(4000);
         headerLoggedIn.openSearchResultByIndex(rowIndex);
 
         System.out.println("Verify user profile page is opened");
